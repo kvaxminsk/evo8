@@ -1,0 +1,315 @@
+
+
+/*colun-right*/
+.block-r {
+    min-height:250px;
+    width: 300px;
+    background-color: #fff;
+    margin-bottom: 45px;
+    overflow: auto;
+    float:left;
+    margin-left: 30px;
+}
+
+.header-close {
+    height: 50px;
+    background-color: #fff;
+    position: relative;
+}
+
+.block-r span{
+    text-transform: uppercase;
+    margin-left: 30px;
+    line-height: 50px;
+    font-family: OpenSans Semibold, Arial, sans-serif;
+}
+
+.close a{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background: #f2f5fa url(../img/close.png) no-repeat center;
+    position:absolute;
+    right: 0;
+    top: 0;
+}
+.close a:hover { background-color: #ffcc00;}
+
+
+.wrap {	padding: 0 50px;}
+
+.wrap p {
+    font:12px OpenSans Semibold, OpenSans, Arial;
+    color:#989eac;
+    margin: 18px 0 7px;
+}
+
+.wrap input[type="text"] {
+    height: 38px;
+    box-sizing: border-box;
+    width:100%;
+    border:1px solid #cdd4e2;
+    padding: 0 20px;
+    font-family: OpenSans Semibold, OpenSans, Arial;
+    outline:none;
+}
+
+.wrap div{margin: 0 auto; width: 150px;}
+
+.button-2 {
+    outline:none;
+    width:150px;
+    height: 35px;
+    border:none;
+    background: url(../img/button-2.png) no-repeat center;
+    color:#ff9500;
+    font-weight: 600;
+    font-size:12px;
+    text-transform: uppercase;
+    cursor:pointer;
+    margin-top: 25px;
+}
+
+.button-2:hover {
+    background: url(../img/bg-1.png) repeat-y;
+    border-radius:25px;
+    height:35px;
+    color:#fff;
+}
+
+.party-img {
+    height: 200px;
+    background: url(../img/maket.jpg) no-repeat center;
+}
+
+.party-bottom  ul{list-style-type: none;}
+.party-bottom  ul li{
+    display: inline-block;
+    width: 50%;
+    height: 50px;
+    background-color: #f2f5fa;
+}
+
+.party-bottom div{text-align:center;}
+.party-bottom a{	line-height: 50px;}
+
+i[class*="arrow-"]{
+    display: inline-block;
+    vertical-align: middle;
+    background: url(../img/sprite-arrow.png) no-repeat;
+    width:25px;
+    height: 10px;
+
+}
+
+i.arrow-right {	background-position: 0 -10px;}
+
+.new-layout input[type="file"] {margin: 15px 0 0;}
+.new-layout .button-2  {margin-top: 25px;}
+
+.party-bottom  ul li:hover {background-color: #e6e9ed;}
+.party-bottom  ul li:hover i.arrow-left {	background-position: -26px 0;}
+.party-bottom  ul li:hover i.arrow-right {	background-position: -26px -10px;}
+
+.fest-massege textarea {
+    height: 65px;
+    width: 100%;
+    resize:none;
+    padding: 5px;
+    box-sizing:border-box;
+    font-family: OpenSans Semibold, OpenSans, Arial;
+    color:#30363e;
+    outline:none;
+    border-color:#cdd4e2;
+}
+
+.rename .button-2 {margin-top: 43px;}
+/*END colun-right*/
+
+/*dialog*/
+.wrap-dialog {
+    width: 500px;
+    margin: 20px auto;
+}
+
+.dialog {
+    background-color: #fff;
+    z-index: 1000;
+    width: 500px;
+}
+
+.header-dialog {
+    height: 50px;
+    line-height: 50px;
+    position:relative;
+    background-color: #fff;
+}
+
+.header-dialog span {
+    text-transform: uppercase;
+    color:#30363e;
+    font-weight: 600;
+    margin-left: 30px;
+    margin-right: 40px;
+}
+
+.client {display: inline-block;}
+
+.client .icon-client {
+    display: inline-block;
+    vertical-align: middle;
+    width: 10px;
+    height: 10px;
+    background: url(../img/arrow-bottom.png) no-repeat center;
+    margin-left: -28px;
+    cursor:pointer;
+}
+
+
+.client input[type="submit"]{
+    background-color: #ff9500;
+    background-image: linear-gradient(to right, #ff9500, #ffcc00);
+    border:none;
+    height: 24px;
+    padding: 0 40px 0 15px;
+    color:#fefefe;
+    outline:none;
+    border-radius: 15px;
+    cursor:pointer;
+}
+/*
+.close-windows {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 995;
+}*/
+
+.message-dialog__overlay {
+    position: fixed;
+    left:  0;
+    top:  0;
+    width: 100%;
+    height: 100%;
+    z-index: 990;
+}
+
+.massege-dialog {
+    box-shadow: inset 0 3px 3px rgba(0,0,0,0.15), inset 0 -3px 3px rgba(0,0,0, .15);
+    margin: 0 auto;
+    width: 480px;
+    height: 300px;
+    background-color: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.massege-dialog div+div {margin-top: 30px;}
+
+.massege-dialog p {
+    color:#989eac;
+    margin-bottom: 8px;
+}
+
+.massege-dialog  span {
+    color:#ff9500;
+    font-weight: 600;
+} 
+
+.pole-dialog {position:relative;}
+
+.pole-dialog > span  {
+    padding: 20px 18px;
+    color:#30363e;
+    display: inline-block;
+    width: 360px;
+    font-weight: 600;
+}
+
+.pole-dialog .user-massege {
+    margin-left: 15px;
+    background-color: #e9ebf0;
+    border-radius: 0 10px 10px 10px;
+}
+
+.pole-dialog .client-massege {
+    margin-left: 64px;
+    background-color: #fff;
+    border:1px solid #dfe1e5;
+    border-radius: 10px 0 10px 10px;
+}
+
+.user-massege::before {
+    content: ''; 
+    position: absolute;
+    left: -10px;
+    bottom:90px;
+    top:25px;
+    border-right: 10px solid #e9ebf0;
+    border-bottom: 10px solid transparent;
+
+}
+
+.client-massege::before, .client-massege::after   {
+    content: ''; 
+    position: absolute;
+    right: -7px;
+    bottom:90px;
+    top:25px;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #dfe1e5;
+}
+
+.client-massege::after {
+    border-left: 11px solid white;
+    top:26px;
+    right: -5px;
+}
+
+.client-data {
+    text-align: right;
+    margin-right: 5px;
+}
+
+.input-massege { padding:23px 30px;}
+
+.input-massege { color:#989eac;}
+
+.input-massege textarea {
+    width:100%;
+    max-height: 110px;
+    resize: none;
+    outline:none;
+    border:1px solid #dfe1e5;
+    border-radius:15px;
+    box-shadow: inset 0 0 5px rgba(0,0,0, .5);
+    margin-top: 8px;
+    font-style: italic;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.input-massege div {margin: 0 auto; width: 150px;}
+
+
+.wrap-dialog .sent-message {
+    width: 123px;
+    background-image: linear-gradient(to right, #ff9500, #ffcc00);
+    margin: o auto;
+    padding: 35px 90px;
+    text-align:center;
+    margin: 0 auto;
+    margin-top: 80px;
+}
+
+.sent-message   span {
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/*end dialog*/
+
+.clear {	clear:both;}
