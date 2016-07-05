@@ -16,12 +16,13 @@ $this->registerJsFile('/js/core.js');
 
 <div class="block title-block">
     <ul>
-        <li>&#8470; <i class="to-arrow"></i>
-        <li>Логин клиента<i class="to-arrow"></i>
-        <li>информация<i class="to-arrow"></i>
-        <li>статус <i class="to-arrow"></i>
-        <li>... <i class="to-arrow"></i>
-        <li>Действие <i class="to-arrow"></i>
+        <li style="width:50px">&#8470;
+        <li style="width:80px">Логин клиента</li>
+        <li style="width:180px">информация</li>
+        <li style="width:70px">Cтатус </li>
+        <li style="width:60px">Кол. активных</br> заказов </li>
+        <li style="width:50px">Кол. неактивных</br> заказов </li>
+        <li style="width:200px">Действие </li>
     </ul>
 </div>
 

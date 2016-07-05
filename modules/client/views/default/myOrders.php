@@ -10,12 +10,15 @@ use yii\helpers\Html;
 
 <div class="block title-block">
     <ul>
-        <li>&#8470; <i class="to-arrow"></i>
-        <li>Заказ<i class="to-arrow"></i>
-        <li>информация<i class="to-arrow"></i>
-        <li>дата <i class="to-arrow"></i>
-        <li>статус <i class="to-arrow"></i>
-        <li>комментарий <i class="to-arrow"></i>
+        <li>&#8470; <!--<i class="to-arrow"></i>-->
+        <li>Тип
+        <li>информация
+        <li>дата
+        <li>Дата готовности
+        <!--<li>комментарий -->
+        <li>Статус
+<!--        <li>Действие</li>-->
+        <li>В архив
     </ul>
 </div>
 
@@ -23,6 +26,8 @@ use yii\helpers\Html;
 ListView::widget([
     'itemView' => '_itemMyOrder',
     'layout' => '{items}<br>{pager}',
-    'dataProvider' => $dataProvider
-])
+    'dataProvider' => $dataProvider,
+]);
+
 ?>
+

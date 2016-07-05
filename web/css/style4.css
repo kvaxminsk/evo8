@@ -249,7 +249,7 @@ i.ic-profil {
 .block ul {list-style-type: none;}
 .block li {
 	display: inline-block;
-	margin-right: 45px;
+	margin-right: 5px;
 }
 
 .block li:first-child {margin-right: 30px;}

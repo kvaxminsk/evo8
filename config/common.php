@@ -34,9 +34,45 @@ return [
                 '<_m:[\w\-]+>/<_c:[\w\-]+>' => '<_m>/<_c>/index',
             ],
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',            
-        ],
+//        'mailer' => [
+//            'class' => 'yii\swiftmailer\Mailer',
+//            'useFileTransport' => false,
+//            'viewPath' => '@app/mail'
+////            'useFileTransport' => false,
+////            'messageConfig' => [
+////                'charset' => 'UTF-8',
+////            ],
+////            'transport' => [
+////                'class' => 'Swift_SmtpTransport',
+////                'host' => 'smtp.google.com',
+////                'username' => 'korol101110@gmail.com',
+////                'password' => 'XVXNPF^R',
+////                'port' => '465',
+////            ],
+////            'class' => 'yii\swiftmailer\Mailer',
+////            'viewPath' => '@app/mailer',
+////            'useFileTransport' => false,
+////            'transport' => [
+////                'class' => 'Swift_SmtpTransport',
+////                'host' => 'smtp.gmail.com',
+////                'username' => 'korol101110@gmail.com',
+////                'password' => 'XVXNPF^R',
+////                'port' => '587',
+////                'encryption' => 'tls',
+////            ],
+//        ],
+//        'mailer' => [
+//            'class' => 'yii\swiftmailer\Mailer',
+//            'useFileTransport' => false,
+//            'transport' => [
+//                'class' => 'Swift_SmtpTransport',
+//                'host' => 'smtp.gmail.com',
+//                'username' => 'korol101110@gmail.com',
+//                'password' => 'XVXNPF^R',
+//                'port' => '587',
+//                'encryption' => 'tls',
+//            ],
+//        ],
         'log' => [
             'targets' => [
                 [

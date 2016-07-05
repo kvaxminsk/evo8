@@ -22,11 +22,11 @@ class Header extends Widget
     public function init()
     {
         if(!strcmp(Yii::$app->user->identity->roleName, 'manager')) {
-            $user = models\UserManager::findOne(['user_id' => Yii::$app->user->getId()]);
+            $user = models\User::findOne(['id' => Yii::$app->user->getId()]);
         }
         
         if(!strcmp(Yii::$app->user->identity->roleName, 'client')) {
-            $user = models\UserClient::findOne(['user_id' => Yii::$app->user->getId()]);
+            $user = models\User::findOne(['id' => Yii::$app->user->getId()]);
         }
                     
         if(empty($user)) {

@@ -77,7 +77,7 @@ class HandlerController extends Controller
     {
         $manager = \app\modules\user\models\UserManager::findOne(['user_id' => Yii::$app->user->getId()]);
         return $this->renderAjax('messageWindow', [
-            'manager' => $manager
+            'manager' => $manager,
         ]);
     }
 }

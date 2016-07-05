@@ -15,6 +15,7 @@ class ActionHelper
     public static function redirecToHome() 
     {
         $user = Yii::$app->user->identity;
+//        var_dump($user->roleName);die('ff');
         $response = Yii::$app->getResponse();
         if (empty($user)) {
             return $response->redirect('/login');

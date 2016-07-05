@@ -18,6 +18,7 @@ class DefaultController extends Controller
     
     public function actionIndex()
     {
+        //die('fff');
         ActionHelper::redirecToHome();
         return $this->render('index');
     }

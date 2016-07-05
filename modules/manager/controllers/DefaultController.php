@@ -5,10 +5,11 @@ namespace app\modules\manager\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\helpers\ArrayHelper;
-use app\modules\admin\models\User;
+use app\modules\user\models\User;
 use app\modules\manager\models\UserSearch;
 use app\modules\user\models;
 use app\components\actions;
+use yii\data\ActiveDataProvider;
 
 class DefaultController extends Controller
 {
@@ -32,49 +33,65 @@ class DefaultController extends Controller
             'create-client' => [
                 'class' => actions\CreateUser::className(),
                 'view' => '@app/modules/manager/views/default/createClient.php',
-                'redirectAction' => 'create-client-profile',
+                'redirectAction' => 'update-client-profile',
                 'role' => 'client',
             ],
-            'create-client-profile' => [
-                'class' => actions\CreateProfile::className(),
-                'view' => '@app/modules/manager/views/default/createClientProfile.php',
-                'redirectAction' => '/manager/default/index',
-                'modelClass' => 'app\modules\user\models\UserClient',
-                'isUseManager' => true,
-            ],
+//            'create-client-profile' => [
+//                'class' => actions\CreateProfile::className(),
+//                'view' => '@app/modules/manager/views/default/createClientProfile.php',
+//                'redirectAction' => '/manager/default/index',
+//                'modelClass' => 'app\modules\user\models\UserClient',
+//                'isUseManager' => true,
+//            ],
             'update-client-profile' => [
                 'class' => actions\UpdateProfile::className(),
-                'view' => '@app/modules/manager/views/default/updateClientProfile.php',
-                'redirectAction' => '/manager/default/index',
-                'modelClass' => 'app\modules\user\models\UserClient',
+                'view' => '@app/modules/client/views/default/profile.php',
+                'redirectAction' => '/',
+                'modelClass' => 'app\modules\user\models\User',
             ],
             'profile' => [
                 'class' => actions\UpdateProfile::className(),
-                'view' => '@app/modules/manager/views/default/ownProfile.php',
+                'view' => '@app/modules/manager/views/default/profile.php',
                 'redirectAction' => '/manager/default/profile',
-                'modelClass' => 'app\modules\user\models\UserManager',
+                'modelClass' => 'app\modules\user\models\User',
                 'isManagerProfile' => true,
-            ], 
-            'delete-client' => [
-                'class' => actions\DeleteRecord::className(),
-                'modelClass' => 'app\modules\user\models\AuthAssignment',
-                'relatedAttributes' => [
-                    'user', 'client'
-                ],
-                'redirectAction' => '/manager/default/index',
-                'findAttribute' => 'user_id',
-            ]
+            ],
+//            'delete-client' => [
+//                'class' => actions\DeleteRecord::className(),
+//                'modelClass' => 'app\modules\user\models\AuthAssignment',
+//                'relatedAttributes' => [
+//                    'user', 'client'
+//                ],
+//                'redirectAction' => '/manager/default/index',
+//                'findAttribute' => 'user_id',
+//            ]
         ]);
     }
-    
+    public function actionDeleteClient($id) {
+        $model = new User();
+        $model = $model::find()->where(['id'=> $id])->one();
+        $model->delete();
+
+        return $this->redirect(['/manager/default/index']);
+    }
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = new User();
+        //$model = $model::find(['role'=>'client'])->all();
 
+        $provider = new ActiveDataProvider([
+            'query' => $model::find()->where(['role'=>'client']),
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
+//        $searchModel = new UserSearch();
+//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+//            'searchModel' => $searchModel,
+            'dataProvider' => $provider,
         ]);
     }
 }

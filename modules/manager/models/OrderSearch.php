@@ -25,14 +25,14 @@ class OrderSearch extends Model
     
     public function rules() {
         return [
-            [['type', 'cvetnost'], 'string']
+            [['type', 'comment'], 'string']
         ];
     }
     
     public function attributeLabels() {
         return [
             'type' => 'Тип',
-            'cvetnost' => 'Цветность',
+            'comment' => 'Цветность',
         ];
     }
     
@@ -52,7 +52,7 @@ class OrderSearch extends Model
         
         $q->andFilterWhere([
             'type' => $this->type,
-        ])->andFilterWhere(['like', 'cvetnost', $this->cvetnost]);
+        ])->andFilterWhere(['like', 'comment', $this->comment]);
         
         return $dataProvider;
     }

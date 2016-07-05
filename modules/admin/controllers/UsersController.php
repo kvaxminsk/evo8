@@ -130,6 +130,8 @@ class UsersController extends Controller
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) 
         {
+            $model->role = 'manager';
+            $model->save();
             $auth = Yii::$app->authManager;
             $role = $auth->getRole('manager');
             $auth->assign($role, $model->getId());

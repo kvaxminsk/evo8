@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Создать администратора', ['create-admin'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Создать менеджера', ['create-manager'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Создать клиента', ['create-client'], ['class' => 'btn btn-success']) ?>
+<!--        --><?//= Html::a('Создать клиента', ['create-client'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

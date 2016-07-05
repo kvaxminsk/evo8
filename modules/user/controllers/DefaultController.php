@@ -61,6 +61,7 @@ class DefaultController extends Controller
     
     public function actionLogin()
     {
+        $this->layout = '@app/views/layouts/login';
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -75,7 +76,25 @@ class DefaultController extends Controller
             ]);
         }
     }
+    
+    public function actionRegistration()
+    {
+        
+        $this->layout = '@app/views/layouts/registration';
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
 
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            ActionHelper::redirecToHome();
+            return $this->goBack();
+        } else {
+            return $this->render('registration', [
+                'model' => $model,
+            ]);
+        }
+    }
     public function actionLogout()
     {
         Yii::$app->user->logout();
@@ -85,8 +104,10 @@ class DefaultController extends Controller
     
     public function actionSignup()
     {
+        $this->layout = '@app/views/layouts/registration';
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
+            
             if ($user = $model->signup()) {
                 Yii::$app->getSession()->setFlash('success', 'Подтвердите ваш электронный адрес.');
                 return $this->goHome();
@@ -117,6 +138,7 @@ class DefaultController extends Controller
  
     public function actionRequestPasswordReset()
     {
+        //$this->layout = '@app/mail/layouts/html.php';
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
