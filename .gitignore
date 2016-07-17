@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+.idea/workspace.xml
+.idea/encodings.xml
+config/.gitignore~
+vendor/yiisoft/yii2/console/runtime/
+.gitignore~
+.htaccess~
+
