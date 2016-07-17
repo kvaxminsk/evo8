@@ -2,7 +2,7 @@
 
 use yii\widgets\ListView;
 use yii\helpers\Html;
-
+$this->params['leftMenu'] = 3;
 $this->registerCssFile('/css/style4.css');
 ?>
 

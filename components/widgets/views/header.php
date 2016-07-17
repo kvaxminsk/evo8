@@ -9,7 +9,7 @@
             <img src="/main/file/show/<?= $nameImg ?>" alt="">
             <div class="user-id">
                 <p><?= Yii::$app->user->identity->username ?></p>
-                <span>id <?= Yii::$app->user->getId() ?></span>
+                <span><?= Yii::$app->user->identity->email ?></span>
             </div>
         </div>
 

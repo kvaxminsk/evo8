@@ -34,9 +34,9 @@ $quantityMyOrder = \app\modules\main\models\Order::countMyOrder();
                             </a>
                         </li>
                         <li><a href="/client/default/create-order"><i class="ic-new_order"></i>Новый заказ</a></li>
-                        <li><a href="#"><i class="ic-templates"></i>Шаблоны</a></li>
-                        <li><a href="#"><i class="ic-archive"></i>Архив</a></li>
-                        <li><a href="#"><i class="ic-profil"></i>Профиль</a></li>
+                        <!--<li><a href="#"><i class="ic-templates"></i>Шаблоны</a></li>-->
+                        <li><a href="/client/default/archive"><i class="ic-archive"></i>Архив</a></li>
+                        <li><a href="/client/default/update-client-profile/<?=Yii::$app->user->getId()?>"><i class="ic-profil"></i>Профиль</a></li>
                     </ul>
                 </div>
 

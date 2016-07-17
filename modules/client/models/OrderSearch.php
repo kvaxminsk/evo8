@@ -19,21 +19,24 @@ use app\modules\main\models\Order;
  */
 class OrderSearch extends Model
 {
-    public $type_id;
-    public $cvetnost;
+    public $product_id;
+    public $comment;
     
     public function rules() {
         return [
-            [['type_id', 'cvetnost'], 'string'],
+            [['product_id', 'comment'], 'string'],
         ];
     }
     
     public function searchMyOrders($params)
     {
-        $q = Order::find()->where(['client_id' => Yii::$app->user->getId()]);
+        $q = Order::find()->where(['client_id' => Yii::$app->user->getId(), 'status' => [1,2,3]]);
         
         $dataProvider = new ActiveDataProvider([
             'query' => $q,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
         
         $this->load($params);
@@ -42,9 +45,28 @@ class OrderSearch extends Model
             return $dataProvider;
         }
         
-        $q->andFilterWhere([ 'type_id' => $this->type_id ])
-                ->andFilterWhere(['like', 'cvetnost', $this->cvetnost]);
+        $q->andFilterWhere([ 'product_id' => $this->product_id ])
+                ->andFilterWhere(['like', 'comment', $this->comment]);
         
+        return $dataProvider;
+    }
+    public function searchMyOrders2($params)
+    {
+        $q = Order::find()->where(['client_id' => Yii::$app->user->getId(), 'status' => [5]]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $q,
+        ]);
+
+        $this->load($params);
+        if(!$this->validate())
+        {
+            return $dataProvider;
+        }
+
+        $q->andFilterWhere([ 'product_id' => $this->product_id])
+            ->andFilterWhere(['like', 'comment', $this->comment]);
+
         return $dataProvider;
     }
 }

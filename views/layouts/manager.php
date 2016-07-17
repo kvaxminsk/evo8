@@ -32,10 +32,14 @@ use app\components\widgets\Header;
                         <li<?= isset(Yii::$app->view->params['leftMenu']) && $this->params['leftMenu'] == 2 ? ' class="active"' : '' ?>>
                             <a href="/manager/default/index"><i class="ic-profil"></i>Клиенты<span></span></a>
                         </li>
-                        <li><a href="/manager/order/template"><i class="ic-templates"></i>Шаблоны</a></li>
+                        <!--<li<?= isset(Yii::$app->view->params['leftMenu']) && $this->params['leftMenu'] == 3 ? ' class="active"' : '' ?>>
+                            <a href="/manager/order/template"><i class="ic-templates"></i>Шаблоны</a>
+                        </li>-->
                        <!-- <li ><a href="#"><i class="ic-new_order"></i>Новый заказ</a></li>
                         <li><a href="#"><i class="ic-archive"></i>Архив</a></li> -->
-                        <li class="active"><a href="/manager/default/profile/<?= Yii::$app->user->getId() ?>"><i class="ic-profil"></i>Профиль</a></li>
+                        <li<?= isset(Yii::$app->view->params['leftMenu']) && $this->params['leftMenu'] == 4 ? ' class="active"' : '' ?>>
+                            <a href="/manager/default/profile/<?= Yii::$app->user->getId() ?>"><i class="ic-profil"></i>Профиль</a>
+                        </li>
                     </ul>
                 </div>
 

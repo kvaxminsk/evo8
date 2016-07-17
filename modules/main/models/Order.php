@@ -2,9 +2,12 @@
 
 namespace app\modules\main\models;
 
+use app\modules\admin\models\Product;
 use Yii;
 use app\modules\user\models\UserManager;
 use yii\behaviors\TimestampBehavior;
+use mdm\upload\UploadBehavior;
+use app\modules\user\models\User;
 /**
  * This is the model class for table "order".
  *
@@ -20,9 +23,10 @@ use yii\behaviors\TimestampBehavior;
  */
 class Order extends \yii\db\ActiveRecord
 {
-    const STATUS = 0;
-    const STATUS1 = 1;
-    const STATUS2 = 2;
+    const STATUS = 1;
+    const STATUS1 = 2;
+    const STATUS2 = 3;
+    const STATUS3 = 4;
     /**
      * @inheritdoc
      */
@@ -37,6 +41,12 @@ class Order extends \yii\db\ActiveRecord
             [
                 'class' => TimestampBehavior::className(),
                 'value' => new \yii\db\Expression('NOW()'),
+            ],
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'file',
+                'savedAttribute' => 'files',
+                'uploadPath' => '@webroot/uploads/files',
             ]
         ];
     }
@@ -47,9 +57,10 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type_id', 'status', 'client_id', 'manager_id'], 'integer'],
-            [['cvetnost', 'bumaga', 'tirazh', 'material'], 'string'],
+            [['product_id', 'status', 'client_id','manager_id'], 'integer'],
+            [['comment', 'data'], 'string'],
             [['stoimost'], 'number'],
+            [['date'], 'date'],
             [['created_at', 'updated_at'], 'safe'],
             [['files'], 'string', 'max' => 255],
         ];
@@ -62,19 +73,17 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'type_id' => 'Type ID',
+            'product_id' => 'Type ID',
             'created_at' => 'Создан',
             'updated_at' => 'Отредактирован',
-            'cvetnost' => 'Цветность',
-            'bumaga' => 'Бумага',
-            'tirazh' => 'Тираж',
+            'comment' => 'Цветность',
+            'data' => 'Бумага',
             'files' => 'Файлы',
-            'material' => 'Материал',
             'stoimost' => 'Стоимость',
             'status' => 'Статус',
             'manager_id' => 'Менеджер',
             'client_id' => 'Клиент',
-            'kol' => 'Количество',
+            'date' => "Дата готовности"
         ];
     }
     
@@ -83,27 +92,35 @@ class Order extends \yii\db\ActiveRecord
         return $this->hasOne(UserManager::className(), ['user_id' => 'manager_id']);
     }
     
-    public function getTypeName() 
+    public function getName() 
     {
-        return $this->hasOne(OrderTypes::className(), ['id' => 'type_id'])->one()->name;
+        return $this->hasOne(Product::className(), ['id' => 'product_id'])->one()->name;
     }
     
     public static function getStatusesArray()
     {
         return [
-            self::STATUS => 'статус',
-            self::STATUS1 => 'статус1',
-            self::STATUS2 => 'статус2',
+            self::STATUS => 'Новый',
+            self::STATUS1 => 'В обработке',
+            self::STATUS2 => 'В работе',
+            self::STATUS3 => 'Завершен',
         ];
     }
     
+
     public function getStatusName()
     {
         return self::getStatusesArray()[$this->status];
     }
-    
+    public function getClientOrganization()
+    {
+        $model = new User();
+        $model = $model::find()->where(['id'=> $this->client_id])->one();
+
+        return $model->organization;
+    }
     public static function countMyOrder()
     {
-        return self::find()->where(['client_id' => Yii::$app->user->getId()])->count();
+        return self::find()->where(['client_id' => Yii::$app->user->getId(),'status' => [1,2,3]])->count();
     }
 }

@@ -54,11 +54,22 @@ class PasswordResetRequestForm extends Model
             }
 
             if ($user->save()) {
-                return \Yii::$app->mailer->compose(['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'], ['user' => $user])
+                $confirmLink = Yii::$app->urlManager->createAbsoluteUrl(['user/default/confirm-email', 'token' => $user->email_confirm_token]);
+
+
+                
+                $message = "Здравствуйте, ".  Html::encode($user->username) ."!";
+
+                $message .= "Пройдите по ссылке, чтобы сменить пароль:";
+
+                $message .= $resetLink ;
+
+                $message .="Если Вы не регистрировались у на нашем сайте, то просто удалите это письмо.";
+                /* \Yii::$app->mailer->compose(['html' => 'passwordResetToken'], ['user' => $user])
                     ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
                     ->setTo($this->email)
                     ->setSubject('Password reset for ' . \Yii::$app->name)
-                    ->send();
+                    ->send();*/
             }
         }
 

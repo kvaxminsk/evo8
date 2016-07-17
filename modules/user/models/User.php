@@ -4,9 +4,11 @@ namespace app\modules\user\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use mdm\upload\UploadBehavior;
 use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 use app\modules\user\models\UserClient;
+use app\modules\main\models\Order;
 
 /**
  * This is the model class for table "{{%user}}".
@@ -46,16 +48,19 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             ['username', 'required'],
             ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
             ['username', 'unique', 'targetClass' => self::className(), 'message' => Yii::t('app', 'Signup username busy')],
-            ['username', 'string', 'min' => 3, 'max' => 255], 
+            ['username', 'string', 'min' => 3, 'max' => 255],
             
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'unique', 'targetClass' => self::className(), 'message' => Yii::t('app', 'Signup email busy')],
             ['email', 'string', 'max' => 255],
-            
+            [['address', 'address_bank', 'comment'], 'string'],
+            [['organization', 'phone', 's_account', 'servicing_bank', 'unp', 'okpo', 'mob_phone', 'names_person', 'avatar'], 'string', 'max' => 255],
+
             ['status', 'integer'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
+
         ];
     }
 
@@ -71,26 +76,54 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'username' => Yii::t('app', 'Username'),            
             'email' => Yii::t('app', 'Email'),
             'status' => Yii::t('app', 'Status'),
+            'organization' => 'Организация',
+            'address' => 'Адрес',
+            'phone' => 'Телефон',
+            's_account' => 'Расчетный счет в банке',
+            'servicing_bank' => 'Обслуживающий банк',
+            'address_bank' => 'Адрес банка',
+            'unp' => 'УНП',
+            'okpo' => 'ОКПО',
+            'comment' => 'Комментарий',
+            'mob_phone' => 'Мобильный телефон',
+            'names_person' => 'Контактный лица',
+            'avatar' => 'Аватар',
         ];
     }
-
+//    public function behaviors()
+//    {
+//        return [
+//            [
+//                'class' => UploadBehavior::className(),
+//                'attribute' => 'file',
+//                'savedAttribute' => 'avatar',
+//                'uploadPath' => '@webroot/uploads',
+//            ]
+//        ];
+//    }
     public function behaviors() {
         return [
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'value' => function() {
-                    return date('Y-m-d H:i:s');
-                },
-            ],
+//            'timestamp' => [
+//                'class' => TimestampBehavior::className(),
+//                'value' => function() {
+//                    return date('Y-m-d H:i:s');
+//                },
+//            ],
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'file',
+                'savedAttribute' => 'avatar',
+                'uploadPath' => '@webroot/uploads',
+            ]
         ];    
     }
-    
-    public function scenarios() {
-        return [
-            self::SCENARIO_DEFAULT => ['username', 'email', 'status'],
-            self::SCENARIO_PROFILE => ['email'],
-        ];
-    }
+
+//    public function scenarios() {
+//        return [
+//            self::SCENARIO_DEFAULT => ['username', 'email', 'status','organization', 'phone', 's_account', 'servicing_bank', 'unp', 'okpo', 'mob_phone', 'names_person', 'avatar'],
+//            self::SCENARIO_PROFILE => ['email'],
+//        ];
+//    }
     
     /**
     * @inheritdoc
@@ -131,8 +164,22 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function getStatusName() 
     {
         return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
-    }  
+    } 
     
+    public function getCountOrderActive() 
+    {
+        $model = new Order();
+        $model = $model::findAll(['status' => [1,2,3],'client_id'=>$this->id]);
+        return count($model);
+    }
+    
+    public function getCountOrderUnActive()
+    {
+        $model = new Order();
+        $model = $model::findAll(['status' => [3,4],'client_id'=> $this->id]);
+        return count($model);
+    }
+
     public function getRoleName()
     {
         $auth = Yii::$app->authManager;

@@ -1,15 +1,16 @@
 <?php
+
 namespace app\modules\admin\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
 
-class User extends \app\modules\user\models\User 
+class User extends \app\modules\user\models\User
 {
     const SCENARIO_CREATE_USER = 'createUser';
     const SCENARIO_UPDATE_USER = 'updateUser';
-    
-    public $newPassword;    
+
+    public $newPassword;
     public $newPasswordRepeat;
     
     public function rules() {
@@ -19,7 +20,7 @@ class User extends \app\modules\user\models\User
             ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
         ]);
     }
-    
+
     public function scenarios()
     {
         return ArrayHelper::merge(parent::scenarios(), [
@@ -27,7 +28,7 @@ class User extends \app\modules\user\models\User
             self::SCENARIO_UPDATE_USER => ['username', 'email', 'status', 'newPassword', 'newPasswordRepeat'],
         ]);
     }
-    
+
     public function beforeSave($insert) {
         if(parent::beforeSave($insert))
         {
@@ -39,7 +40,7 @@ class User extends \app\modules\user\models\User
         }
         return false;
     }
-    
+
     public function attributeLabels() {
         return \yii\helpers\ArrayHelper::merge(parent::attributeLabels(), [
             'newPassword' => 'Новый пароль',
